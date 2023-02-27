@@ -46,8 +46,8 @@ class News(models.Model):
     content = models.TextField()
     create_at = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, related_name='news_category', on_delete=models.CASCADE, null=True)
-    author = models.ForeignKey(Author, related_name='news_author', on_delete=models.SET_DEFAULT, null=True, default='Null')
-    tag = models.ForeignKey(Tag, related_name='news_tag', on_delete=models.SET_DEFAULT, null=True, default='Null')
+    author = models.ManyToManyField(Author, related_name='news_author', null=True, blank=True)
+    tag = models.ManyToManyField(Tag, related_name='news_tag', null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -67,5 +67,5 @@ class News(models.Model):
 
 
 
-
-
+# models.ForeignKey(Author, related_name='news_author', on_delete=models.SET_DEFAULT, null=True, default='Null')
+# models.ForeignKey(Tag, related_name='news_tag', on_delete=models.SET_DEFAULT, null=True, default='Null')
