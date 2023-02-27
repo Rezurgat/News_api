@@ -1,23 +1,23 @@
 from django.contrib import admin
 
-from . import models
+from . models import Category, Author, Tag, News
 
 
-@admin.register(models.Category)
+@admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug', 'create_at']
 
 
-@admin.register(models.Author)
+@admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ['firstname', 'lastname', 'avatar', 'position', 'bio']
 
 
-@admin.register(models.Tag)
+@admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug', 'create_at']
 
 
-@admin.register(models.News)
+@admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ['title', 'slug', 'image', 'content', 'create_at', 'category', 'author', 'tag']
+    list_display = [field.name for field in News._meta.get_fields() if not field.many_to_many]
